@@ -33,12 +33,30 @@
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
     // TODO #2 - Loop over jobs dictionary and display all job fields
-    <ul>
+    @for (int i = 0; i < ViewBag.jobs.Count; i++)
+    {
+        <table class="job-listing">
+            <tbody>
+        @foreach (KeyValuePair<string, string> jobField in ViewBag.jobs[i])
+        {
+                <tr>
+                    <td>
+                        @jobField.Key
+                    </td>
+                    <td>
+                        @jobField.Value
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    }
+    @*<ul>
         @foreach (KeyValuePair<string, string> column in ViewBag.columns)
         {
             <li>
                 <a asp-controller="List" asp-action="Values" asp-route-column="@column.Key">@column.Value</a>
             </li>
         }
-    </ul>
+    </ul>*@
 }
