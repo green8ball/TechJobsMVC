@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System;
 
 namespace TechJobs.Models
 {
@@ -53,21 +54,17 @@ namespace TechJobs.Models
 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (Dictionary<string, string> job in AllJobs)
             {
-
-                foreach (string key in row.Keys)
+                foreach (KeyValuePair<string, string> jobField in job)
                 {
-                    string aValue = row[key];
-
-                    if (aValue.ToLower().Contains(value.ToLower()))
+                    if (jobField.Value.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        jobs.Add(row);
-
-                        // Finding one field in a job that matches is sufficient
+                        jobs.Add(job);
                         break;
                     }
                 }
+
             }
 
             return jobs;
@@ -91,7 +88,7 @@ namespace TechJobs.Models
             {
                 string aValue = row[column];
 
-                if (aValue.ToLower().Contains(value.ToLower()))
+                if (aValue.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     jobs.Add(row);
                 }
