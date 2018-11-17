@@ -30,25 +30,5 @@
 @if (ViewBag.jobs != null)
 {
 
-    <h3>@ViewBag.jobs.Count Result(s)</h3>
-
-    // TODO #2 - Loop over jobs dictionary and display all job fields
-    @for (int i = 0; i < ViewBag.jobs.Count; i++)
-    {
-        <table class="job-listing">
-            <tbody>
-        @foreach (KeyValuePair<string, string> jobField in ViewBag.jobs[i])
-        {
-                <tr>
-                    <td>
-                        @jobField.Key
-                    </td>
-                    <td>
-                        @jobField.Value
-                    </td>
-                </tr>
-        }
-            </tbody>
-        </table>
-    }
+    @Html.Partial("_JobsResults")
 }
